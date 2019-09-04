@@ -15,14 +15,25 @@
         },
         methods: {
             minus: function () {
-                this.$emit('update', this.index, this.value - 1)
+                this.$store.commit("minusValue",this.index);
+                // this.$emit('update', this.index, this.value - 1)
+                // this.$store.state.counter[this.index].value=element.value-1
             },
             plus: function () {
-                this.$emit('update', this.index, this.value + 1)
-            }
+                // this.$emit('update', this.index, this.value + 1)
+                if(this.$store.getters.countersSum>=10 || this.$store.state.counters[this.index].value>=10){
+                    this.$router.push({ path: '/' })
+                } 
+                else{
+                    this.$store.commit("plusValue",this.index);
+                }
+               
+                  
         }
     }
+}
 </script>
 <style scoped>
 
 </style>
+    
